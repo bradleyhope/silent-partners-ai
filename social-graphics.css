@@ -1,0 +1,146 @@
+/* Social Media Graphics Styles */
+
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.platform-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.platform-btn:hover {
+    border-color: #2A2A2A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.platform-btn.selected {
+    border-color: #E74C3C;
+    background: #FFF5F5;
+}
+
+.platform-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.platform-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.platform-size {
+    font-size: 12px;
+    color: #666;
+}
+
+.template-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.template-btn {
+    padding: 15px;
+    border: 2px solid #E0E0E0;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.template-btn:hover {
+    border-color: #2A2A2A;
+    background: #F5F5F5;
+}
+
+.template-btn.selected {
+    border-color: #E74C3C;
+    background: #FFF5F5;
+    font-weight: bold;
+}
+
+.social-form {
+    margin: 20px 0;
+}
+
+.social-preview {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#social-preview-canvas {
+    max-width: 100%;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.social-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.primary-btn {
+    padding: 12px 30px;
+    background: #E74C3C;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+    background: #C0392B;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.secondary-btn {
+    padding: 12px 30px;
+    background: white;
+    color: #2A2A2A;
+    border: 2px solid #2A2A2A;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.secondary-btn:hover:not(:disabled) {
+    background: #2A2A2A;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.secondary-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.social-options h3,
+.template-options h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #2A2A2A;
+}

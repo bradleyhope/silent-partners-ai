@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Extraction Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ai-extraction.css">
+    <style>
+        body {
+            margin: 20px;
+            font-family: Georgia, serif;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #status {
+            padding: 10px;
+            margin: 10px 0;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>AI Extraction Test</h1>
+        
+        <div id="status">Initializing...</div>
+        
+        <div class="sidebar">
+            <!-- AI extraction UI will be inserted here -->
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="ai-extraction.js"></script>
+    <script>
+        // Mock visualizer for testing
+        window.silentPartners = window.silentPartners || {};
+        window.silentPartners.state = { nodes: [], links: [], nextNodeId: 1 };
+        window.silentPartners.updateVisualization = function() {
+            console.log('Mock: updateVisualization called');
+        };
+        window.silentPartners.addNodeFromData = function(nodeData) {
+            console.log('Mock: addNodeFromData', nodeData);
+            const id = nodeData.id || `node_${window.silentPartners.state.nextNodeId++}`;
+            window.silentPartners.state.nodes.push({
+                id: id,
+                name: nodeData.name,
+                type: nodeData.type || "person",
+                importance: nodeData.importance || 0.5
+            });
+        };
+        
+        // Wait for visualizer mock
+        setTimeout(() => {
+            window.silentPartners.visualizer = {
+                addEntity: function(name, type, importance, description) {
+                    console.log('Mock: addEntity', name, type, importance);
+                    window.silentPartners.addNodeFromData({
+                        name: name,
+                        type: type,
+                        importance: importance / 5,
+                        description: description
+                    });
+                    document.getElementById('status').textContent = `Added entity: ${name}`;
+                    return true;
+                },
+                addRelationship: function(source, target, type, value, date, status) {
+                    console.log('Mock: addRelationship', source, '→', target);
+                    document.getElementById('status').textContent = `Added relationship: ${source} → ${target}`;
+                    return true;
+                },
+                getState: function() {
+                    return window.silentPartners.state;
+                },
+                entityExists: function(name) {
+                    return window.silentPartners.state.nodes.some(n => 
+                        n.name.toLowerCase() === name.toLowerCase()
+                    );
+                }
+            };
+            
+            document.getElementById('status').textContent = 'Mock visualizer ready. Loading AI extraction UI...';
+        }, 100);
+    </script>
+    <script src="ai-extraction-ui.js"></script>
+    <script>
+        // Debug logging
+        setTimeout(() => {
+            const status = document.getElementById('status');
+            if (window.silentPartners?.aiExtraction) {
+                status.textContent = 'AI Extraction module loaded ✓';
+                status.style.background = '#d4edda';
+            } else {
+                status.textContent = 'AI Extraction module NOT loaded ✗';
+                status.style.background = '#f8d7da';
+            }
+        }, 500);
+    </script>
+</body>
+</html>

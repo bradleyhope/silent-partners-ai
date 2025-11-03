@@ -1,0 +1,159 @@
+/**
+ * AI Extraction Modal Styles
+ */
+
+/* Toolbar button */
+.ai-toolbar-button {
+    padding: 8px 16px;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 10px;
+}
+
+.ai-toolbar-button:hover {
+    background: #357ABD;
+}
+
+/* Floating button (fallback) */
+.ai-floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.2s;
+    z-index: 999;
+}
+
+.ai-floating-button:hover {
+    background: #357ABD;
+    transform: scale(1.1);
+}
+
+/* Modal overlay */
+.ai-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+/* Modal content */
+.ai-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    background: #F5F2ED;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Modal header */
+.ai-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 2px solid #ddd;
+    background: #fff;
+}
+
+.ai-modal-header h2 {
+    margin: 0;
+    font-size: 1.4em;
+    color: #2A2A2A;
+}
+
+.ai-modal-close {
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.ai-modal-close:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+/* Modal body */
+.ai-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Reuse existing styles from ai-extraction.css */
+.ai-modal-body .ai-config,
+.ai-modal-body .ai-input-section,
+.ai-modal-body .ai-model-select,
+.ai-modal-body .ai-status,
+.ai-modal-body .ai-results {
+    /* Inherit from ai-extraction.css */
+}
+
+/* Adjust spacing for modal */
+.ai-modal-body > * {
+    margin-bottom: 20px;
+}
+
+.ai-modal-body > *:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ai-modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .ai-modal-header {
+        padding: 16px;
+    }
+    
+    .ai-modal-body {
+        padding: 16px;
+    }
+}

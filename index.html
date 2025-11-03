@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Partners - Lombardi-style Network Visualizer</title>
+    <meta name="description" content="Create network visualizations in the tradition of Mark Lombardi. A tool for exploring the covert relationships between individuals and corporations.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="assets/img/favicon.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://silentpartners.app/">
+    <meta property="og:title" content="Silent Partners - Lombardi-style Network Visualizer">
+    <meta property="og:description" content="Create network visualizations in the tradition of Mark Lombardi. A tool for exploring the covert relationships between individuals and corporations.">
+    <meta property="og:image" content="https://silentpartners.app/assets/img/Silent Partners.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://silentpartners.app/">
+    <meta property="twitter:title" content="Silent Partners - Lombardi-style Network Visualizer">
+    <meta property="twitter:description" content="Create network visualizations in the tradition of Mark Lombardi. A tool for exploring the covert relationships between individuals and corporations.">
+    <meta property="twitter:image" content="https://silentpartners.app/assets/img/Silent Partners.png">
+    
+    <!-- Additional SEO -->
+    <meta name="author" content="Project Brazen">
+    <meta name="keywords" content="network visualization, Mark Lombardi, data visualization, corruption, investigations, relationships, silent partners">
+    <meta name="theme-color" content="#F5F2ED">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="social-graphics.css">
+    <link rel="stylesheet" href="ai-extraction.css">
+    <link rel="stylesheet" href="ai-extraction-modal.css">
+    <script>
+        // UNCONDITIONAL TOP-LEVEL LOGGING
+        console.log('🔍 HTML document head executing');
+    </script>
+</head>
+<body>
+    <script>
+        // UNCONDITIONAL TOP-LEVEL LOGGING
+        console.log('🔍 HTML body start executing');
+        console.log('🔍 Document ready state:', document.readyState);
+    </script>
+    <div id="loading">
+        <div class="loading-content">
+            <h1>Silent Partners</h1>
+            <p>Lombardi-style Network Visualizer</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+<div id="app">
+    <!-- Toggle button outside of controls so it's always visible -->
+    <button id="toggle-controls" class="toggle-button" aria-label="Toggle sidebar"></button>
+    
+    <div id="controls">
+        <div class="control-section">
+            <h2>Silent Partners</h2>
+            <p class="subtitle">Lombardi-style Network Visualizer</p>
+            <p class="quote">"The basic unit is the individual and the corporation, and the 'silent partners' are the covert relationships." — <a href="https://cms.megaphone.fm/channel/illuminator" target="_blank" rel="noopener">Mark Lombardi</a></p>
+            
+            <div class="form-group">
+                <label for="network-title">Network Title</label>
+                <input type="text" id="network-title" placeholder="Untitled Network">
+            </div>
+            
+            <div class="form-group">
+                <label for="network-description">Description</label>
+                <textarea id="network-description" placeholder="Network description"></textarea>
+            </div>
+        </div>
+        
+        <div class="control-section">
+            <h3>Example Networks</h3>
+            <div class="button-group">
+                <button id="load-1mdb">1MDB</button>
+                <button id="load-bcci">BCCI</button>
+                <button id="load-epstein">Epstein</button>
+            </div>
+        </div>
+        
+        <div class="control-section">
+            <h3>🎨 Enhanced Features</h3>
+            <div class="form-group">
+                <label for="theme-select">Theme</label>
+                <select id="theme-select">
+                    <option>Lombardi Classic</option>
+                    <option>Clean Minimal</option>
+                    <option>Dark Mode</option>
+                    <option>Corporate</option>
+                    <option>Vibrant</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="layout-select-enhanced">Layout</label>
+                <select id="layout-select-enhanced">
+                    <option>Force-Directed</option>
+                    <option>Circular</option>
+                    <option>Radial</option>
+                    <option>Hierarchical</option>
+                    <option>Timeline</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="control-section">
+            <h3>Add Entity</h3>
+            <form id="entity-form">
+                <div class="form-group">
+                    <label for="entity-name">Name</label>
+                    <input type="text" id="entity-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="entity-type">Type</label>
+                    <select id="entity-type">
+                        <option value="person">Person</option>
+                        <option value="corporation">Corporation</option>
+                        <option value="government">Government</option>
+                        <option value="financial">Financial</option>
+                        <option value="organization">Organization</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="entity-importance">Importance</label>
+                    <input type="range" id="entity-importance" min="0.1" max="1" step="0.1" value="0.5">
+                </div>
+                
+                <div class="form-group">
+                    <label for="entity-date">Date (optional)</label>
+                    <input type="text" id="entity-date" placeholder="YYYY or YYYY-YYYY">
+                </div>
+                
+                <button type="submit">Add Entity</button>
+            </form>
+            
+            <div id="entity-list" class="item-list"></div>
+        </div>
+        
+        <div class="control-section">
+            <h3>Add Relationship</h3>
+            <form id="relationship-form">
+                <div class="form-group">
+                    <label for="source-entity">Source</label>
+                    <select id="source-entity" required>
+                        <option value="">Select entity</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="target-entity">Target</label>
+                    <select id="target-entity" required>
+                        <option value="">Select entity</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="relationship-type">Type</label>
+                    <input type="text" id="relationship-type" placeholder="e.g. Invested in">
+                </div>
+                
+                <div class="form-group">
+                    <label for="relationship-value">Value (optional)</label>
+                    <input type="text" id="relationship-value" placeholder="e.g. 1000000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="relationship-date">Date (optional)</label>
+                    <input type="text" id="relationship-date" placeholder="YYYY or YYYY-YYYY">
+                </div>
+                
+                <div class="form-group">
+                    <label for="relationship-status">Status</label>
+                    <select id="relationship-status">
+                        <option value="confirmed">Confirmed</option>
+                        <option value="suspected">Suspected</option>
+                        <option value="former">Former</option>
+                    </select>
+                </div>
+                
+                <button type="submit">Add Relationship</button>
+            </form>
+            
+            <div id="relationship-list" class="item-list"></div>
+        </div>
+        
+        <div class="control-section">
+            <h3>Layout</h3>
+            <div class="form-group">
+                <label for="layout-select">Layout Type</label>
+                <select id="layout-select">
+                    <option value="force">Force-Directed</option>
+                    <option value="circular">Circular</option>
+                    <option value="radial">Radial</option>
+                    <option value="timeline">Timeline</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="curvature-slider">Curvature: <span id="curvature-value">1.0</span></label>
+                <input type="range" id="curvature-slider" min="0.1" max="1" step="0.1" value="1.0">
+            </div>
+            
+            <div class="form-group checkbox">
+                <input type="checkbox" id="show-dates">
+                <label for="show-dates">Show Dates</label>
+            </div>
+            
+            <button id="regenerate-layout">Regenerate Layout</button>
+        </div>
+        
+        <div class="control-section">
+            <h3>Export</h3>
+            <button id="create-artwork">Generate Artwork</button>
+            
+            <div style="margin-top: 10px; display: flex; gap: 10px;">
+                <button id="export-png-btn" class="btn btn-primary" style="flex: 1;">📸 Export PNG</button>
+                <button id="export-svg-btn" class="btn btn-secondary" style="flex: 1;">🎨 Export SVG</button>
+            </div>
+            
+            <div class="form-group checkbox" style="margin-top: 15px;">
+                <input type="checkbox" id="show-title-card">
+                <label for="show-title-card">Show Title Card</label>
+            </div>
+            
+            <div id="artworkTitle" class="title-card" style="display: none;">
+                <h2 id="titleCardTitle">Untitled Network</h2>
+                <p id="titleCardNotes">Network visualization</p>
+            </div>
+        </div>
+        
+        <div class="control-section">
+            <h3>Save/Load</h3>
+            <div class="button-group">
+                <button id="save-browser">Save to Browser</button>
+                <button id="load-browser">Load from Browser</button>
+            </div>
+            <div class="button-group">
+                <button id="export-data">Export Data</button>
+                <button id="import-data">Import Data</button>
+                <input type="file" id="import-file-input" accept=".json" style="display: none;">
+            </div>
+            <div class="button-group">
+                <button id="clear-network" class="danger">Clear Network</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="visualization">
+        <div class="top-right-controls">
+            <button id="info-toggle" class="info-toggle-button" aria-label="Toggle info panel">?</button>
+            <a href="https://www.projectbrazen.com" target="_blank" rel="noopener" class="brazen-link">Brazen</a>
+        </div>
+        
+        <div class="bottom-right-controls">
+            <div class="support-dropdown">
+                <button id="support-toggle" class="support-button" aria-label="Support us">Support us!</button>
+                <div id="support-options" class="support-options">
+                    <a href="https://whalehunting.projectbrazen.com/#/portal/subscribe" target="_blank" rel="noopener" class="support-option">Subscribe to Whale Hunting</a>
+                    <a href="https://whalehunting.projectbrazen.com/#/portal/support" target="_blank" rel="noopener" class="support-option">Send us a tip</a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="info-panel" class="info-panel">
+            <div class="info-panel-content">
+                <button id="info-close" class="info-close-button" aria-label="Close info panel">&times;</button>
+                <h3>Got a tip or want to collaborate?</h3>
+                <p>We welcome leads, ideas, and partnership opportunities. Contact us securely at:</p>
+                <p class="contact-email"><em>silentpartners@projectbrazen.com</em></p>
+                <p class="confidential-note">All correspondence is confidential.</p>
+            </div>
+        </div>
+        
+        <svg id="network-svg"></svg>
+        <div class="hover-info"></div>
+    </div>
+</div>
+
+<div id="export-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Export Artwork</h2>
+            <button id="export-close" class="close-button">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="export-options">
+                <div class="form-group">
+                    <label for="export-title">Title</label>
+                    <input type="text" id="export-title" placeholder="Network Title">
+                </div>
+                
+                <div class="form-group">
+                    <label for="export-subtitle">Subtitle (optional)</label>
+                    <input type="text" id="export-subtitle" placeholder="Subtitle">
+                </div>
+                
+                <div class="form-group">
+                    <label for="export-notes">Notes (optional)</label>
+                    <textarea id="export-notes" placeholder="Additional notes or context"></textarea>
+                </div>
+                
+                <div class="format-selector">
+                    <h3>Format</h3>
+                    <div class="format-options">
+                        <div class="format-option" data-format="square">
+                            <div class="format-preview square"></div>
+                            <span>Square</span>
+                            <span class="format-size">2400×2400</span>
+                        </div>
+                        <div class="format-option" data-format="landscape">
+                            <div class="format-preview landscape"></div>
+                            <span>Landscape</span>
+                            <span class="format-size">2400×1350</span>
+                        </div>
+                        <div class="format-option selected" data-format="print">
+                            <div class="format-preview print"></div>
+                            <span>Print</span>
+                            <span class="format-size">2400×3000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="export-preview-container">
+                <h3>Preview</h3>
+                <canvas id="export-preview"></canvas>
+            </div>
+            
+            <div class="export-actions">
+                <button id="download-artwork">Download</button>
+                <button id="share-artwork">Share</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SVG Definitions -->
+<svg width="0" height="0">
+    <defs>
+        <marker id="arrowhead" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,-5L10,0L0,5" fill="#2A2A2A"></path>
+        </marker>
+    </defs>
+</svg>
+
+<!-- Scripts -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="initial_data.js"></script>
+<script src="lombardi-visualizer.js"></script>
+<script src="working-enhancements.js"></script>
+<script src="export-feature.js"></script>
+<script src="ai-extraction.js"></script>
+<script src="ai-visualizer-integration.js"></script>
+<script src="ai-extraction-modal.js"></script>
+
+</body>
+</html>
