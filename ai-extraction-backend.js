@@ -18,6 +18,7 @@
         try {
             const response = await fetch(`${API_BASE_URL}/api/extract`, {
                 method: 'POST',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -48,6 +49,7 @@
         try {
             const response = await fetch(`${API_BASE_URL}/api/infer`, {
                 method: 'POST',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
