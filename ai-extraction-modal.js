@@ -84,21 +84,9 @@
                 
                 <div class="ai-modal-body">
                     <div class="ai-config">
-                        <label for="ai-api-key-modal">OpenAI API Key</label>
-                        <div class="api-key-input-group">
-                            <input 
-                                type="password" 
-                                id="ai-api-key-modal" 
-                                placeholder="sk-..." 
-                                autocomplete="off"
-                            />
-                            <button id="ai-save-key-modal" class="btn-small" title="Save API key">💾</button>
-                            <button id="ai-clear-key-modal" class="btn-small" title="Clear API key">🗑️</button>
-                        </div>
-                        <small class="help-text">
-                            Get your API key from <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI</a>. 
-                            Stored locally in your browser.
-                        </small>
+                        <p class="help-text">
+                            <strong>🔐 Server-Side Processing:</strong> AI extraction uses your backend API with a secure server-side OpenAI key. No client-side API key needed!
+                        </p>
                     </div>
 
                     <div class="ai-input-section">
@@ -208,10 +196,6 @@
         // Close modal
         modal.querySelector('.ai-modal-close').addEventListener('click', closeModal);
         modal.querySelector('.ai-modal-overlay').addEventListener('click', closeModal);
-
-        // API key management
-        modal.querySelector('#ai-save-key-modal').addEventListener('click', saveApiKey);
-        modal.querySelector('#ai-clear-key-modal').addEventListener('click', clearApiKey);
 
         // Text input character count
         const textInput = modal.querySelector('#ai-text-input-modal');
@@ -343,12 +327,6 @@
             return;
         }
 
-        const state = window.silentPartners.aiExtraction.getState();
-        if (!state.hasApiKey) {
-            showStatus('Please configure your OpenAI API key first', 'error');
-            return;
-        }
-
         // Show loading state
         const extractBtn = document.querySelector('#ai-extract-btn-modal');
         const originalText = extractBtn.textContent;
@@ -360,7 +338,8 @@
         document.querySelector('#ai-results-modal').style.display = 'none';
 
         try {
-            const results = await window.silentPartners.aiExtraction.extractFromText(text, model);
+            // Use backend API instead of client-side extraction
+            const results = await window.silentPartners.aiBackend.extractNetwork(text, model);
             extractionResults = results;
 
             // Select all by default
@@ -569,12 +548,6 @@
             return;
         }
 
-        const apiKey = window.silentPartners.aiExtraction.getApiKey();
-        if (!apiKey) {
-            showInferenceStatus('Please save your API key first', 'error');
-            return;
-        }
-
         const textInput = document.querySelector('#ai-text-input-modal').value;
         const model = document.querySelector('#ai-model-modal').value;
 
@@ -585,28 +558,40 @@
             const entities = extractionResults.entities;
             const relationships = extractionResults.relationships;
 
-            // Run inference pipeline
-            const result = await window.silentPartners.relationshipInference.runInferencePipeline(
+            // Use backend API for inference
+            const result = await window.silentPartners.aiBackend.inferRelationships(
                 entities,
                 relationships,
                 textInput,
-                apiKey,
-                {
-                    model: model,
-                    minConfidence: 0.6,
-                    maxCandidates: 20
-                }
+                model
             );
 
-            if (!result.success) {
-                showInferenceStatus(`Inference failed: ${result.error}`, 'error');
+            // Format result to match expected structure
+            const formattedResult = {
+                success: true,
+                newRelationships: result.inferred_relationships || [],
+                relationshipsAdded: (result.inferred_relationships || []).length,
+                candidatesAnalyzed: (result.inferred_relationships || []).length,
+                inferredDetails: (result.inferred_relationships || []).map(r => ({
+                    source: r.source,
+                    target: r.target,
+                    type: r.type,
+                    exists: true,
+                    confidence: Math.round((r.confidence || 0.7) * 100),
+                    reasoning: r.description,
+                    evidence: r.evidence
+                }))
+            };
+
+            if (!formattedResult.success) {
+                showInferenceStatus(`Inference failed: ${formattedResult.error}`, 'error');
                 return;
             }
 
             // Display results
-            displayInferenceResults(result);
+            displayInferenceResults(formattedResult);
             showInferenceStatus(
-                `Found ${result.relationshipsAdded} new connections (analyzed ${result.candidatesAnalyzed} candidates)`,
+                `Found ${formattedResult.relationshipsAdded} new connections (analyzed ${formattedResult.candidatesAnalyzed} candidates)`,
                 'success'
             );
 

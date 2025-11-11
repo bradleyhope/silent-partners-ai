@@ -10,6 +10,7 @@ import json
 import logging
 from datetime import datetime
 from pathlib import Path
+from api_extraction import register_extraction_routes
 
 # Configure logging
 logging.basicConfig(
@@ -28,6 +29,9 @@ CORS(app, origins=cors_origins if cors_origins != '*' else '*')
 
 # Store for network data (in-memory, can be replaced with database)
 networks = {}
+
+# Register AI extraction routes
+register_extraction_routes(app)
 
 @app.route('/')
 def index():
