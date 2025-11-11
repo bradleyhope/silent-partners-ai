@@ -35,13 +35,15 @@ networks = {}
 openai_client = None
 try:
     api_key = os.getenv('OPENAI_API_KEY')
+    logger.info(f'Checking for OPENAI_API_KEY: {"Found" if api_key else "Not found"}')
     if api_key:
+        logger.info(f'API key starts with: {api_key[:10]}...')
         openai_client = OpenAI(api_key=api_key)
         logger.info('OpenAI client initialized successfully')
     else:
         logger.warning('OPENAI_API_KEY not found in environment')
 except Exception as e:
-    logger.error(f'Failed to initialize OpenAI client: {e}')
+    logger.error(f'Failed to initialize OpenAI client: {e}', exc_info=True)
 
 @app.route('/')
 def index():
