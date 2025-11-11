@@ -157,6 +157,40 @@
                             ➕ Add Selected to Network
                         </button>
                     </div>
+
+                    <div id="ai-inference-section-modal" class="ai-inference-section" style="display: none;">
+                        <div class="inference-header">
+                            <h4>🔗 Find Missing Connections</h4>
+                            <p class="help-text">
+                                Use AI reasoning to find implicit relationships between entities.
+                                This finds connections that weren't explicitly stated in the text.
+                            </p>
+                        </div>
+
+                        <div class="inference-options">
+                            <label>
+                                <input type="checkbox" id="ai-inference-enabled-modal" checked />
+                                Enable relationship inference
+                            </label>
+                            <div class="inference-stats">
+                                <small>Cost: ~$0.005 extra | Time: ~15 seconds</small>
+                            </div>
+                        </div>
+
+                        <button id="ai-infer-btn-modal" class="btn-primary">
+                            🔍 Find Missing Connections
+                        </button>
+
+                        <div id="ai-inference-status-modal" class="ai-status" style="display: none;"></div>
+
+                        <div id="ai-inference-results-modal" class="ai-results" style="display: none;">
+                            <h5>✓ New Connections Found <span id="inference-count-modal">0</span></h5>
+                            <div id="inference-list-modal" class="results-list"></div>
+                            <button id="ai-add-inferred-modal" class="btn-success">
+                                ➕ Add Inferred Connections
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -194,6 +228,10 @@
 
         // Add to network button
         modal.querySelector('#ai-add-to-network-modal').addEventListener('click', addToNetwork);
+
+        // Inference buttons
+        modal.querySelector('#ai-infer-btn-modal').addEventListener('click', performInference);
+        modal.querySelector('#ai-add-inferred-modal').addEventListener('click', addInferredToNetwork);
 
         // ESC key to close
         document.addEventListener('keydown', (e) => {
@@ -417,6 +455,9 @@
 
         // Show results
         document.querySelector('#ai-results-modal').style.display = 'block';
+        
+        // Show inference section
+        document.querySelector('#ai-inference-section-modal').style.display = 'block';
     }
 
     /**
@@ -515,6 +556,153 @@
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    /**
+     * Perform relationship inference
+     */
+    async function performInference() {
+        console.log('[AI Modal] Starting relationship inference...');
+        
+        if (!extractionResults || !extractionResults.entities) {
+            showInferenceStatus('Please extract entities first', 'error');
+            return;
+        }
+
+        const apiKey = window.silentPartners.aiExtraction.getApiKey();
+        if (!apiKey) {
+            showInferenceStatus('Please save your API key first', 'error');
+            return;
+        }
+
+        const textInput = document.querySelector('#ai-text-input-modal').value;
+        const model = document.querySelector('#ai-model-modal').value;
+
+        try {
+            showInferenceStatus('Analyzing network for missing connections...', 'loading');
+            
+            // Get current entities and relationships
+            const entities = extractionResults.entities;
+            const relationships = extractionResults.relationships;
+
+            // Run inference pipeline
+            const result = await window.silentPartners.relationshipInference.runInferencePipeline(
+                entities,
+                relationships,
+                textInput,
+                apiKey,
+                {
+                    model: model,
+                    minConfidence: 0.6,
+                    maxCandidates: 20
+                }
+            );
+
+            if (!result.success) {
+                showInferenceStatus(`Inference failed: ${result.error}`, 'error');
+                return;
+            }
+
+            // Display results
+            displayInferenceResults(result);
+            showInferenceStatus(
+                `Found ${result.relationshipsAdded} new connections (analyzed ${result.candidatesAnalyzed} candidates)`,
+                'success'
+            );
+
+        } catch (error) {
+            console.error('[AI Modal] Inference error:', error);
+            showInferenceStatus(`Error: ${error.message}`, 'error');
+        }
+    }
+
+    /**
+     * Display inference results
+     */
+    function displayInferenceResults(result) {
+        const resultsDiv = document.querySelector('#ai-inference-results-modal');
+        const listDiv = document.querySelector('#inference-list-modal');
+        const countSpan = document.querySelector('#inference-count-modal');
+
+        // Store results
+        extractionResults.inferredRelationships = result.newRelationships;
+        extractionResults.inferenceDetails = result;
+
+        // Update count
+        countSpan.textContent = result.relationshipsAdded;
+
+        // Clear and populate list
+        listDiv.innerHTML = '';
+
+        result.inferredDetails.forEach((rel, index) => {
+            if (!rel.exists) return;
+
+            const item = document.createElement('div');
+            item.className = 'result-item';
+            item.innerHTML = `
+                <div class="result-item-header">
+                    <strong>${escapeHtml(rel.source)} ↔ ${escapeHtml(rel.target)}</strong>
+                    <span class="badge">${escapeHtml(rel.type || 'association')}</span>
+                    <span class="confidence">${rel.confidence}%</span>
+                </div>
+                <div class="result-item-body">
+                    <small><strong>Reasoning:</strong> ${escapeHtml(rel.reasoning || '')}</small>
+                    <small><strong>Evidence:</strong> ${escapeHtml(rel.evidence || '')}</small>
+                </div>
+            `;
+            listDiv.appendChild(item);
+        });
+
+        // Show results
+        resultsDiv.style.display = 'block';
+    }
+
+    /**
+     * Add inferred relationships to network
+     */
+    function addInferredToNetwork() {
+        if (!extractionResults?.inferredRelationships) {
+            showInferenceStatus('No inferred relationships to add', 'error');
+            return;
+        }
+
+        const relationships = extractionResults.inferredRelationships;
+        
+        console.log(`[AI Modal] Adding ${relationships.length} inferred relationships to network`);
+
+        // Add each relationship
+        relationships.forEach(rel => {
+            window.silentPartners.visualizer.addRelationship(
+                rel.source,
+                rel.target,
+                rel.type,
+                rel.description,
+                rel.status || 'inferred'
+            );
+        });
+
+        showInferenceStatus(`Added ${relationships.length} inferred relationships to network!`, 'success');
+        
+        // Update visualization
+        if (window.silentPartners.visualizer.update) {
+            window.silentPartners.visualizer.update();
+        }
+    }
+
+    /**
+     * Show inference status message
+     */
+    function showInferenceStatus(message, type = 'info') {
+        const statusDiv = document.querySelector('#ai-inference-status-modal');
+        statusDiv.textContent = message;
+        statusDiv.className = `ai-status ai-status-${type}`;
+        statusDiv.style.display = 'block';
+
+        if (type === 'success' || type === 'error') {
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
     }
 
     // Initialize when DOM is ready
