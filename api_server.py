@@ -424,7 +424,6 @@ Return ONLY the JSON object, no additional text."""
                 {"role": "system", "content": "You are an expert at analyzing documents and extracting network relationships. Always return valid JSON."},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.3,
             response_format={"type": "json_object"}
         )
         
@@ -531,7 +530,6 @@ Return ONLY the JSON object."""
                 {"role": "system", "content": "You are an expert at network analysis and finding implicit connections. Always return valid JSON."},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.3,
             response_format={"type": "json_object"}
         )
         
