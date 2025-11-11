@@ -104,9 +104,10 @@
                     <div class="ai-model-select">
                         <label for="ai-model-modal">Model</label>
                         <select id="ai-model-modal">
-                            <option value="gpt-4o-mini" selected>GPT-4o Mini (Recommended - Fast & Affordable)</option>
-                            <option value="gpt-4o">GPT-4o (More Accurate, Higher Cost)</option>
-                            <option value="gpt-4-turbo">GPT-4 Turbo (Premium)</option>
+                            <option value="gpt-5-mini">GPT-5 Mini (Recommended - Fast & Affordable)</option>
+                            <option value="gpt-5">GPT-5 (Balanced Performance)</option>
+                            <option value="gpt-5-pro">GPT-5 Pro (Most Advanced)</option>
+                            <option value="gpt-5-nano">GPT-5 Nano (Ultra Fast & Cheap)</option>
                         </select>
                     </div>
 
@@ -488,31 +489,38 @@
         let addedRelationships = 0;
 
         // Add entities
+        const entityIdMap = {}; // Map AI IDs to visualizer IDs
         selectedEntities.forEach(idx => {
             const entity = extractionResults.entities[idx];
-            window.silentPartners.visualizer.addEntity(
-                entity.name,
-                entity.type,
-                entity.importance,
-                entity.description || ''
-            );
+            const nodeData = {
+                name: entity.name,
+                type: entity.type || 'person',
+                importance: entity.importance || 0.5,
+                description: entity.description || ''
+            };
+            const visualizerNode = window.silentPartners.addNodeFromData(nodeData);
+            entityIdMap[entity.id] = visualizerNode.id;
             addedEntities++;
         });
 
         // Add relationships
         selectedRelationships.forEach(idx => {
             const rel = extractionResults.relationships[idx];
-            window.silentPartners.visualizer.addRelationship(
-                rel.source,
-                rel.target,
-                rel.type,
-                rel.value || '',
-                rel.date || '',
-                rel.status
-            );
+            const linkData = {
+                source: entityIdMap[rel.source] || rel.source,
+                target: entityIdMap[rel.target] || rel.target,
+                type: rel.type || '',
+                value: rel.value || '',
+                status: rel.status || 'confirmed'
+            };
+            if (rel.date) linkData.date = rel.date;
+            window.silentPartners.addLinkFromData(linkData);
             addedRelationships++;
         });
 
+        // Update visualization
+        window.silentPartners.updateVisualization();
+        
         showStatus(`Added ${addedEntities} entities and ${addedRelationships} relationships to network`, 'success');
 
         // Close modal after successful add

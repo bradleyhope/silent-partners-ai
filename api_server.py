@@ -369,17 +369,17 @@ def api_extract():
             return jsonify({'error': 'Missing text parameter'}), 400
         
         text = data['text']
-        # Map frontend model names to OpenAI API model names
+        # Map frontend model names to OpenAI API model names (GPT-5 models)
         model_map = {
-            'gpt-4.1-mini': 'gpt-4o-mini',
-            'gpt-4.1-nano': 'gpt-4o-mini',
-            'gemini-2.5-flash': 'gpt-4o-mini',
-            'gpt-4o-mini': 'gpt-4o-mini',
-            'gpt-4o': 'gpt-4o',
-            'gpt-4-turbo': 'gpt-4-turbo'
+            'gpt-4.1-mini': 'gpt-5-mini',
+            'gpt-4.1-nano': 'gpt-5-nano',
+            'gpt-4o-mini': 'gpt-5-mini',
+            'gpt-4o': 'gpt-5',
+            'gpt-4-turbo': 'gpt-5-pro',
+            'gemini-2.5-flash': 'gpt-5-mini'
         }
-        requested_model = data.get('model', 'gpt-4o-mini')
-        model = model_map.get(requested_model, 'gpt-4o-mini')
+        requested_model = data.get('model', 'gpt-5-mini')
+        model = model_map.get(requested_model, requested_model)
         
         if not text.strip():
             return jsonify({'error': 'Text cannot be empty'}), 400
@@ -463,17 +463,17 @@ def api_infer():
         entities = data.get('entities', [])
         relationships = data.get('relationships', [])
         original_text = data.get('text', '')
-        # Map frontend model names to OpenAI API model names
+        # Map frontend model names to OpenAI API model names (GPT-5 models)
         model_map = {
-            'gpt-4.1-mini': 'gpt-4o-mini',
-            'gpt-4.1-nano': 'gpt-4o-mini',
-            'gemini-2.5-flash': 'gpt-4o-mini',
-            'gpt-4o-mini': 'gpt-4o-mini',
-            'gpt-4o': 'gpt-4o',
-            'gpt-4-turbo': 'gpt-4-turbo'
+            'gpt-4.1-mini': 'gpt-5-mini',
+            'gpt-4.1-nano': 'gpt-5-nano',
+            'gpt-4o-mini': 'gpt-5-mini',
+            'gpt-4o': 'gpt-5',
+            'gpt-4-turbo': 'gpt-5-pro',
+            'gemini-2.5-flash': 'gpt-5-mini'
         }
-        requested_model = data.get('model', 'gpt-4o-mini')
-        model = model_map.get(requested_model, 'gpt-4o-mini')
+        requested_model = data.get('model', 'gpt-5-mini')
+        model = model_map.get(requested_model, requested_model)
         
         if not entities:
             return jsonify({'error': 'No entities provided'}), 400
