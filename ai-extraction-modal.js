@@ -104,9 +104,9 @@
                     <div class="ai-model-select">
                         <label for="ai-model-modal">Model</label>
                         <select id="ai-model-modal">
-                            <option value="gpt-4.1-mini" selected>GPT-4.1 Mini (Fast, Cheap)</option>
-                            <option value="gpt-4.1-nano">GPT-4.1 Nano (Fastest)</option>
-                            <option value="gemini-2.5-flash">Gemini 2.5 Flash (Fast)</option>
+                            <option value="gpt-4o-mini" selected>GPT-4o Mini (Recommended - Fast & Affordable)</option>
+                            <option value="gpt-4o">GPT-4o (More Accurate, Higher Cost)</option>
+                            <option value="gpt-4-turbo">GPT-4 Turbo (Premium)</option>
                         </select>
                     </div>
 

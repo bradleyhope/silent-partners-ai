@@ -367,7 +367,17 @@ def api_extract():
             return jsonify({'error': 'Missing text parameter'}), 400
         
         text = data['text']
-        model = data.get('model', 'gpt-4o-mini')
+        # Map frontend model names to OpenAI API model names
+        model_map = {
+            'gpt-4.1-mini': 'gpt-4o-mini',
+            'gpt-4.1-nano': 'gpt-4o-mini',
+            'gemini-2.5-flash': 'gpt-4o-mini',
+            'gpt-4o-mini': 'gpt-4o-mini',
+            'gpt-4o': 'gpt-4o',
+            'gpt-4-turbo': 'gpt-4-turbo'
+        }
+        requested_model = data.get('model', 'gpt-4o-mini')
+        model = model_map.get(requested_model, 'gpt-4o-mini')
         
         if not text.strip():
             return jsonify({'error': 'Text cannot be empty'}), 400
@@ -451,7 +461,17 @@ def api_infer():
         entities = data.get('entities', [])
         relationships = data.get('relationships', [])
         original_text = data.get('text', '')
-        model = data.get('model', 'gpt-4o-mini')
+        # Map frontend model names to OpenAI API model names
+        model_map = {
+            'gpt-4.1-mini': 'gpt-4o-mini',
+            'gpt-4.1-nano': 'gpt-4o-mini',
+            'gemini-2.5-flash': 'gpt-4o-mini',
+            'gpt-4o-mini': 'gpt-4o-mini',
+            'gpt-4o': 'gpt-4o',
+            'gpt-4-turbo': 'gpt-4-turbo'
+        }
+        requested_model = data.get('model', 'gpt-4o-mini')
+        model = model_map.get(requested_model, 'gpt-4o-mini')
         
         if not entities:
             return jsonify({'error': 'No entities provided'}), 400
