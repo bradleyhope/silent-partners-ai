@@ -104,10 +104,9 @@
                     <div class="ai-model-select">
                         <label for="ai-model-modal">Model</label>
                         <select id="ai-model-modal">
-                            <option value="gpt-5-mini">GPT-5 Mini (Recommended - Fast & Affordable)</option>
-                            <option value="gpt-5">GPT-5 (Balanced Performance)</option>
-                            <option value="gpt-5-pro">GPT-5 Pro (Most Advanced)</option>
-                            <option value="gpt-5-nano">GPT-5 Nano (Ultra Fast & Cheap)</option>
+                            <option value="gpt-5-nano">GPT-5 Nano (Fast & Affordable)</option>
+                            <option value="gpt-5">GPT-5 (Premium - Balanced)</option>
+                            <option value="gpt-5-thinking">GPT-5 Thinking (Premium - Advanced Reasoning)</option>
                         </select>
                     </div>
 
