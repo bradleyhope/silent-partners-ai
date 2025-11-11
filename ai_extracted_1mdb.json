@@ -1,0 +1,424 @@
+{
+  "nodes": [
+    {
+      "id": "node_0",
+      "name": "1Malaysia Development Berhad",
+      "type": "corporation",
+      "importance": 5,
+      "description": "Malaysian sovereign wealth fund at the center of the financial fraud scandal"
+    },
+    {
+      "id": "node_1",
+      "name": "Jho Low",
+      "type": "person",
+      "importance": 5,
+      "description": "Malaysian financier and primary architect of the 1MDB fraud"
+    },
+    {
+      "id": "node_2",
+      "name": "Low Taek Jho",
+      "type": "person",
+      "importance": 5,
+      "description": "Alternate name of Jho Low"
+    },
+    {
+      "id": "node_3",
+      "name": "Najib Razak",
+      "type": "person",
+      "importance": 5,
+      "description": "Former Prime Minister of Malaysia and chairman of 1MDB's advisory board implicated in the scandal"
+    },
+    {
+      "id": "node_4",
+      "name": "Goldman Sachs",
+      "type": "corporation",
+      "importance": 4,
+      "description": "Investment bank that arranged bond sales raising funds for 1MDB and involved in the scandal"
+    },
+    {
+      "id": "node_5",
+      "name": "Tim Leissner",
+      "type": "person",
+      "importance": 4,
+      "description": "Goldman Sachs Southeast Asia chairman who pleaded guilty to conspiracy related to 1MDB"
+    },
+    {
+      "id": "node_6",
+      "name": "Roger Ng",
+      "type": "person",
+      "importance": 3,
+      "description": "Goldman Sachs banker convicted for his role in the 1MDB scandal"
+    },
+    {
+      "id": "node_7",
+      "name": "Good Star Limited",
+      "type": "corporation",
+      "importance": 3,
+      "description": "Shell company registered in Seychelles used to receive over $1 billion from 1MDB bond proceeds"
+    },
+    {
+      "id": "node_8",
+      "name": "Seychelles",
+      "type": "location",
+      "importance": 2,
+      "description": "Location where Good Star Limited was registered"
+    },
+    {
+      "id": "node_9",
+      "name": "Equanimity",
+      "type": "financial",
+      "importance": 3,
+      "description": "Luxury yacht purchased by Jho Low with stolen 1MDB funds"
+    },
+    {
+      "id": "node_10",
+      "name": "The Wolf of Wall Street",
+      "type": "event",
+      "importance": 3,
+      "description": "Hollywood film financed by Jho Low through Red Granite Pictures"
+    },
+    {
+      "id": "node_11",
+      "name": "Red Granite Pictures",
+      "type": "corporation",
+      "importance": 3,
+      "description": "Production company co-founded by Riza Aziz that financed The Wolf of Wall Street"
+    },
+    {
+      "id": "node_12",
+      "name": "Riza Aziz",
+      "type": "person",
+      "importance": 3,
+      "description": "Co-founder of Red Granite Pictures and stepson of Najib Razak"
+    },
+    {
+      "id": "node_13",
+      "name": "U.S. Department of Justice",
+      "type": "corporation",
+      "importance": 4,
+      "description": "U.S. federal agency that launched kleptocracy case against 1MDB fraud"
+    },
+    {
+      "id": "node_14",
+      "name": "Swiss authorities",
+      "type": "corporation",
+      "importance": 3,
+      "description": "Authorities who opened criminal proceedings and froze accounts linked to 1MDB"
+    },
+    {
+      "id": "node_15",
+      "name": "Monetary Authority of Singapore",
+      "type": "corporation",
+      "importance": 3,
+      "description": "Singapore financial regulator that closed banks for breaches related to 1MDB"
+    },
+    {
+      "id": "node_16",
+      "name": "BSI Bank",
+      "type": "corporation",
+      "importance": 2,
+      "description": "Singapore bank closed for anti-money laundering breaches related to 1MDB"
+    },
+    {
+      "id": "node_17",
+      "name": "Falcon Private Bank",
+      "type": "corporation",
+      "importance": 2,
+      "description": "Singapore bank closed for anti-money laundering breaches related to 1MDB"
+    },
+    {
+      "id": "node_18",
+      "name": "Mahathir Mohamad",
+      "type": "person",
+      "importance": 4,
+      "description": "Malaysian Prime Minister who reopened investigations into 1MDB after 2018 election"
+    },
+    {
+      "id": "node_19",
+      "name": "AmBank",
+      "type": "corporation",
+      "importance": 3,
+      "description": "Malaysian bank fined for failing to report suspicious transactions involving Najib Razak"
+    },
+    {
+      "id": "node_20",
+      "name": "Standard Chartered",
+      "type": "corporation",
+      "importance": 3,
+      "description": "Financial institution scrutinized for processing 1MDB-related transactions"
+    },
+    {
+      "id": "node_21",
+      "name": "Deutsche Bank",
+      "type": "corporation",
+      "importance": 3,
+      "description": "Financial institution scrutinized for processing 1MDB-related transactions"
+    },
+    {
+      "id": "node_22",
+      "name": "International Petroleum Investment Company",
+      "type": "corporation",
+      "importance": 4,
+      "description": "Abu Dhabi sovereign wealth fund involved in bond guarantees and settlement with Malaysia"
+    },
+    {
+      "id": "node_23",
+      "name": "Malaysia",
+      "type": "location",
+      "importance": 5,
+      "description": "Country whose sovereign wealth fund 1MDB was looted and whose government is involved in investigations"
+    },
+    {
+      "id": "node_24",
+      "name": "Saudi royal family",
+      "type": "corporation",
+      "importance": 3,
+      "description": "Alleged source of political donations to Najib Razak"
+    },
+    {
+      "id": "node_25",
+      "name": "Beverly Hills",
+      "type": "location",
+      "importance": 2,
+      "description": "Location where Jho Low purchased luxury real estate"
+    },
+    {
+      "id": "node_26",
+      "name": "New York",
+      "type": "location",
+      "importance": 2,
+      "description": "Location where Jho Low purchased luxury real estate"
+    },
+    {
+      "id": "node_27",
+      "name": "London",
+      "type": "location",
+      "importance": 2,
+      "description": "Location where Jho Low purchased luxury real estate"
+    }
+  ],
+  "links": [
+    {
+      "source": "node_1",
+      "target": "node_0",
+      "type": "financial",
+      "description": "Orchestrated the systematic looting of billions of dollars from 1MDB",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_1",
+      "target": "node_3",
+      "type": "association",
+      "description": "Cultivated relationships to gain control over 1MDB financial decisions",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_3",
+      "target": "node_0",
+      "type": "employment",
+      "description": "Served as chairman of 1MDB's advisory board during his term as Prime Minister",
+      "status": "former",
+      "value": ""
+    },
+    {
+      "source": "node_3",
+      "target": "node_24",
+      "type": "financial",
+      "description": "Claimed to have received $681 million as political donations from Saudi royal family",
+      "status": "alleged",
+      "value": "$681 million"
+    },
+    {
+      "source": "node_3",
+      "target": "node_0",
+      "type": "financial",
+      "description": "Approximately $681 million from 1MDB accounts deposited into his personal accounts",
+      "status": "confirmed",
+      "value": "$681 million"
+    },
+    {
+      "source": "node_4",
+      "target": "node_0",
+      "type": "financial",
+      "description": "Arranged bond sales raising $6.5 billion for 1MDB and earned nearly $600 million in fees",
+      "status": "confirmed",
+      "value": "$6.5 billion"
+    },
+    {
+      "source": "node_5",
+      "target": "node_4",
+      "type": "employment",
+      "description": "Served as Southeast Asia chairman and pleaded guilty to conspiracy related to 1MDB",
+      "status": "former",
+      "value": ""
+    },
+    {
+      "source": "node_6",
+      "target": "node_4",
+      "type": "employment",
+      "description": "Banker convicted for role in 1MDB scandal",
+      "status": "former",
+      "value": ""
+    },
+    {
+      "source": "node_1",
+      "target": "node_7",
+      "type": "ownership",
+      "description": "Created shell company to disguise flow of stolen 1MDB funds",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_7",
+      "target": "node_8",
+      "type": "association",
+      "description": "Registered in Seychelles",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_1",
+      "target": "node_9",
+      "type": "ownership",
+      "description": "Purchased luxury yacht with stolen 1MDB funds",
+      "status": "confirmed",
+      "value": "$250 million"
+    },
+    {
+      "source": "node_1",
+      "target": "node_11",
+      "type": "financial",
+      "description": "Financed Hollywood film The Wolf of Wall Street",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_12",
+      "target": "node_11",
+      "type": "ownership",
+      "description": "Co-founder of the production company",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_12",
+      "target": "node_3",
+      "type": "personal",
+      "description": "Stepson of Najib Razak",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_13",
+      "target": "node_1",
+      "type": "legal",
+      "description": "Launched kleptocracy case and sought to seize assets purchased with stolen 1MDB funds",
+      "status": "confirmed",
+      "value": "$1.7 billion"
+    },
+    {
+      "source": "node_14",
+      "target": "node_0",
+      "type": "legal",
+      "description": "Opened criminal proceedings and froze accounts linked to 1MDB",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_15",
+      "target": "node_16",
+      "type": "legal",
+      "description": "Closed bank for breaches of anti-money laundering requirements related to 1MDB",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_15",
+      "target": "node_17",
+      "type": "legal",
+      "description": "Closed bank for breaches of anti-money laundering requirements related to 1MDB",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_18",
+      "target": "node_3",
+      "type": "legal",
+      "description": "Reopened investigations and filed criminal charges against Najib after 2018 election",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_3",
+      "target": "node_23",
+      "type": "employment",
+      "description": "Served as Prime Minister of Malaysia from 2009 to 2018",
+      "status": "former",
+      "value": ""
+    },
+    {
+      "source": "node_19",
+      "target": "node_3",
+      "type": "financial",
+      "description": "Failed to report suspicious transactions involving Najib's accounts and was fined",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_20",
+      "target": "node_0",
+      "type": "financial",
+      "description": "Facilitated movement of 1MDB funds and faced scrutiny",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_21",
+      "target": "node_0",
+      "type": "financial",
+      "description": "Facilitated movement of 1MDB funds and faced scrutiny",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_22",
+      "target": "node_0",
+      "type": "financial",
+      "description": "Guaranteed some of 1MDB's bonds leading to disputes and $1.2 billion settlement",
+      "status": "confirmed",
+      "value": "$1.2 billion"
+    },
+    {
+      "source": "node_1",
+      "target": "node_25",
+      "type": "ownership",
+      "description": "Purchased luxury real estate with stolen 1MDB funds",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_1",
+      "target": "node_26",
+      "type": "ownership",
+      "description": "Purchased luxury real estate with stolen 1MDB funds",
+      "status": "confirmed",
+      "value": ""
+    },
+    {
+      "source": "node_1",
+      "target": "node_27",
+      "type": "ownership",
+      "description": "Purchased luxury real estate with stolen 1MDB funds",
+      "status": "confirmed",
+      "value": ""
+    }
+  ],
+  "metadata": {
+    "title": "1MDB Scandal - AI Extracted",
+    "description": "Network extracted from document using AI",
+    "source": "AI extraction with GPT-4.1 Mini",
+    "date": "2025-11-03"
+  }
+}

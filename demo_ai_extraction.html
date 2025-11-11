@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Extracted 1MDB Network - Silent Partners</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ai-extraction.css">
+    <link rel="stylesheet" href="ai-extraction-modal.css">
+    <style>
+        .demo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            z-index: 10000;
+            font-family: Georgia, serif;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .demo-banner h2 {
+            margin: 0 0 5px 0;
+            font-size: 1.2em;
+        }
+        .demo-banner p {
+            margin: 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        body {
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        <h2>🤖 AI-Extracted Network Demo</h2>
+        <p>This 1MDB network was automatically extracted from a document using GPT-4.1 Mini • 28 entities • 27 relationships • Cost: $0.002</p>
+    </div>
+
+    <div id="app">
+        <button id="toggle-sidebar" aria-label="Toggle sidebar">☰</button>
+        
+        <div id="controls" class="sidebar">
+            <div class="sidebar-header">
+                <h1>Silent Partners</h1>
+                <p class="subtitle">Lombardi-style Network Visualizer</p>
+                <blockquote>
+                    "The basic unit is the individual and the corporation, and the 'silent partners' are the covert relationships."
+                    — <a href="https://cms.megaphone.fm/channel/illuminator" target="_blank">Mark Lombardi</a>
+                </blockquote>
+            </div>
+
+            <div class="control-section">
+                <label for="network-title">Network Title</label>
+                <input type="text" id="network-title" value="1MDB Scandal - AI Extracted" placeholder="Untitled Network">
+                
+                <label for="network-description">Description</label>
+                <textarea id="network-description" rows="3">Network extracted from document using AI with GPT-4.1 Mini. Contains 28 entities and 27 relationships automatically identified from a 4,446-character document about the 1MDB financial scandal.</textarea>
+            </div>
+
+            <div class="control-section">
+                <h3>🎨 Enhanced Features</h3>
+                
+                <label for="theme-select">Theme</label>
+                <select id="theme-select">
+                    <option value="lombardi">Lombardi Classic</option>
+                    <option value="minimal">Clean Minimal</option>
+                    <option value="dark">Dark Mode</option>
+                    <option value="corporate">Corporate</option>
+                    <option value="vibrant">Vibrant</option>
+                </select>
+
+                <label for="layout-select">Layout</label>
+                <select id="layout-select">
+                    <option value="force">Force-Directed</option>
+                    <option value="circular">Circular</option>
+                    <option value="radial">Radial</option>
+                    <option value="hierarchical">Hierarchical</option>
+                    <option value="timeline">Timeline</option>
+                </select>
+            </div>
+
+            <div class="control-section">
+                <h3>Layout</h3>
+                <label for="layout-type-select">Layout Type</label>
+                <select id="layout-type-select">
+                    <option value="force">Force-Directed</option>
+                    <option value="circular">Circular</option>
+                    <option value="radial">Radial</option>
+                </select>
+                
+                <label for="curvature-slider">Curvature: <span id="curvature-value">1.0</span></label>
+                <input type="range" id="curvature-slider" min="0" max="2" step="0.1" value="1.0">
+                
+                <label>
+                    <input type="checkbox" id="show-dates"> Show Dates
+                </label>
+                
+                <button id="regenerate-layout">Regenerate Layout</button>
+            </div>
+
+            <div class="control-section">
+                <h3>Export</h3>
+                <button id="export-png">📸 Export PNG</button>
+                <button id="export-svg">🎨 Export SVG</button>
+            </div>
+        </div>
+
+        <svg id="network-svg"></svg>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="lombardi-visualizer.js"></script>
+    <script src="export-feature.js"></script>
+    <script src="ai-extraction.js"></script>
+    <script src="ai-extraction-modal.js"></script>
+    <script src="ai-visualizer-integration.js"></script>
+    
+    <script>
+        // Auto-load the AI-extracted network
+        console.log('Loading AI-extracted 1MDB network...');
+        
+        fetch('ai_extracted_1mdb.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log('✅ Loaded AI-extracted network:', data);
+                console.log(`Nodes: ${data.nodes.length}, Links: ${data.links.length}`);
+                
+                // Load into visualizer
+                if (typeof visualizer !== 'undefined') {
+                    visualizer.loadNetwork(data);
+                    console.log('✅ Network loaded into visualizer');
+                } else {
+                    console.error('❌ Visualizer not found');
+                }
+            })
+            .catch(error => {
+                console.error('❌ Error loading network:', error);
+            });
+    </script>
+</body>
+</html>
