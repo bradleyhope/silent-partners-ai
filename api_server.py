@@ -23,10 +23,9 @@ logger = logging.getLogger(__name__)
 # Initialize Flask app
 app = Flask(__name__, static_folder='.')
 
-# Configure CORS based on environment
+# Configure CORS to allow all origins
 import os
-cors_origins = os.getenv('CORS_ORIGINS', '*')
-CORS(app, origins=cors_origins if cors_origins != '*' else '*')
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # Store for network data (in-memory, can be replaced with database)
 networks = {}
