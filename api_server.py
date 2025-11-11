@@ -27,6 +27,14 @@ app = Flask(__name__, static_folder='.')
 import os
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
+# Add explicit CORS headers to all responses
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+
 # Store for network data (in-memory, can be replaced with database)
 networks = {}
 
