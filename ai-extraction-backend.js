@@ -15,8 +15,12 @@
      * Extract network from text using backend API
      */
     async function extractNetwork(text, model = 'gpt-4.1-mini') {
+        const apiUrl = `${API_BASE_URL}/api/extract`;
+        console.log('[AI Backend] Making request to:', apiUrl);
+        console.log('[AI Backend] Request payload:', { text: text.substring(0, 100) + '...', model });
+        
         try {
-            const response = await fetch(`${API_BASE_URL}/api/extract`, {
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
@@ -28,17 +32,42 @@
                 })
             });
 
+            console.log('[AI Backend] Response status:', response.status);
+            console.log('[AI Backend] Response headers:', Object.fromEntries(response.headers.entries()));
+
             if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.error || 'Extraction failed');
+                let errorMessage = 'Extraction failed';
+                try {
+                    const error = await response.json();
+                    errorMessage = error.error || errorMessage;
+                } catch (e) {
+                    errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+                }
+                throw new Error(errorMessage);
             }
 
             const result = await response.json();
+            console.log('[AI Backend] Extraction successful:', result);
             return result;
 
         } catch (error) {
             console.error('[AI Backend] Extraction error:', error);
-            throw error;
+            console.error('[AI Backend] Error details:', {
+                name: error.name,
+                message: error.message,
+                stack: error.stack,
+                apiUrl: apiUrl
+            });
+            
+            // Provide more helpful error messages
+            let userMessage = error.message;
+            if (error.message === 'Failed to fetch') {
+                userMessage = 'Cannot connect to API server. Please check your internet connection or try again later.';
+            } else if (error.name === 'TypeError' && error.message.includes('NetworkError')) {
+                userMessage = 'Network error: Unable to reach the API server.';
+            }
+            
+            throw new Error(userMessage);
         }
     }
 
